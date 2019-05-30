@@ -30,8 +30,8 @@ resource "digitalocean_droplet" "mongo-test2" {
   ssh_keys = ["${digitalocean_ssh_key.ins_default.fingerprint}"]
 }
 
-resource "digitalocean_droplet" "mongo-test3" {
-  name     = "mongo-test3"
+resource "digitalocean_droplet" "mongo-test4" {
+  name     = "mongo-test4"
   image    = "${var.do_image}"
   region   = "${var.do_region}"
   size     = "${var.do_size}"
@@ -40,7 +40,7 @@ resource "digitalocean_droplet" "mongo-test3" {
 
 # create an ansible inventory file
 resource "null_resource" "ansible-provision" {
-  depends_on = ["digitalocean_droplet.mongo-test1", "digitalocean_droplet.mongo-test2", "digitalocean_droplet.mongo-test3"]
+  depends_on = ["digitalocean_droplet.mongo-test1","digitalocean_droplet.mongo-test2","digitalocean_droplet.mongo-test4"]
 
   provisioner "local-exec" {
     command = "echo [mongo] > hosts"
@@ -55,7 +55,7 @@ resource "null_resource" "ansible-provision" {
   }
 
   provisioner "local-exec" {
-    command = "echo '${digitalocean_droplet.mongo-test3.name} ansible_host=${digitalocean_droplet.mongo-test3.ipv4_address} ansible_ssh_user=root' >> hosts"
+    command = "echo '${digitalocean_droplet.mongo-test4.name} ansible_host=${digitalocean_droplet.mongo-test4.ipv4_address} ansible_ssh_user=root' >> hosts"
   }
 
   provisioner "local-exec" {
