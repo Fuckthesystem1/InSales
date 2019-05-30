@@ -17,14 +17,14 @@
   roles:
     - ufw
 
-- hosts: mongo
-  gather_facts: yes
-  roles:
-    - role: mongodb
-      when: "'mongo_master' in group_names"
+#- hosts: mongo
+#  gather_facts: yes
+#  roles:
+#    - role: mongodb
+#      when: "'mongo_master' in group_names"
 
-- hosts: mongo
-  gather_facts: yes
-  roles:
-    - role: mongodb
-      when: "'mongo_replicas' in group_names"
+#- hosts: mongo
+#  gather_facts: yes
+#  roles:
+#    - role: mongodb
+#      when: "'mongo_replicas' in group_names"

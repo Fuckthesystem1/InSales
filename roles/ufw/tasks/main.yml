@@ -1,2 +1,23 @@
 ---
 # tasks file for ufw
+
+- name: Install ufw
+  apt: package=ufw state=present
+
+- name: Allow access to port ssh
+  ufw:
+    rule: allow
+    proto: tcp
+    src: 136.169.147.196
+    port: 22
+
+- name: Enable ufw
+  ufw: 
+    state: enabled
+    policy: reject
+
+- name: Enable ufw logging
+  ufw:
+    logging: on
+  notify:
+    - restart ufw
